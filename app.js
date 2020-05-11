@@ -17,7 +17,7 @@ class Title extends React.Component {
     // on peut appeler "this.setState(objet)" (version simple)
     // mais si les nouvelles valeurs dépendent des anciennes, il faut utiliser la version fonction :
     // ON DOIT TOUJOURS RETOURNER UNE NOUVELLE RÉFÉRENCE (**immutable**)
-    this.setState(function (state) {
+    this.setState((state) => {
       if (state.color === "blue") {
         return { color: "red" };
       } else {
@@ -32,8 +32,8 @@ class Title extends React.Component {
       {
         // Accès au state via "this.state" qui a été déclaré dans le constructeur
         style: { color: this.state.color },
-        // Aïe, c'est cassé → comment ça marche "this" ?
-        onClick: this.handleClick,
+        // Utilisation des fonctions flêche pour maintenir le this du scope parent
+        onClick: (e) => this.handleClick(e),
       },
       this.props.text
     );
@@ -41,13 +41,12 @@ class Title extends React.Component {
 }
 
 // On peut faire cohabiter classes (stateful) et fonctions (stateless)
-function Hello() {
-  return React.createElement(
+const Hello = () =>
+  React.createElement(
     "main",
     { className: "app" },
     React.createElement(Title, { text: "Hello, React" })
   );
-}
 
 // 2. Instanciation du composant racine
 const rootElement = React.createElement(Hello);
