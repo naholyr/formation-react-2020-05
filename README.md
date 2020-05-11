@@ -11,6 +11,7 @@
   - Webpack : modularisation (``import``) et *bundling*
   - Démarrage : ``npm start``
   - Sass : ``npm add node-sass``
+5. JSX
 
 ## Outils
 
