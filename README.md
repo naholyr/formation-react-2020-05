@@ -13,6 +13,10 @@
   - Sass : ``npm add node-sass``
   - PropTypes : ``npm add prop-types``
 5. JSX
+  - Éléments non rendus : ``undefined``, ``null``, ``false``, ``""``
+  - Boucles : ``{array.map(item => élément)}``
+    - Penser à ``key`` pour les performances et l'état
+  - Conditions : ``{test ? élément1 : élément2}`` ou ``{test || élément}``
 
 ## Outils
 
