@@ -4,6 +4,7 @@
 2. Mon premier composant
   - Sans état
   - Avec état "stateful"
+3. Cycle de vie
 
 ## Outils
 
