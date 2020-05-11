@@ -1,13 +1,14 @@
 // 1. Déclaration des composants
+
+function Title() {
+  return React.createElement("h1", {}, "Hello, React");
+}
+
 function Hello() {
   return React.createElement(
-    "h1", // Élément HTML = nom du tag
-    {
-      // Propriétés de l’élément, ici attributs HTML… sauf exceptions
-      className: "app", // Attention, pas "class" mais "className"
-      style: { color: "blue" }, // Attention, pas une chaîne mais un objet
-    },
-    "Hello, React" // Enfants de l’élément
+    "main",
+    { className: "app" },
+    React.createElement(Title)
   );
 }
 
