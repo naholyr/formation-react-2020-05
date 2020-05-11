@@ -10,9 +10,11 @@
   - Babel : JS moderne
   - Webpack : modularisation (``import``) et *bundling*
   - Démarrage : ``npm start``
+  - Sass : ``npm add node-sass``
 
 ## Outils
 
 - npm : [npmjs.com/get-npm](https://www.npmjs.com/get-npm)
 - serveur local : ``npx serve``
 - *create-react-app* : ``npx create-react-app app``
+- ajouter une dépendance : ``npm add nom-du-module``
