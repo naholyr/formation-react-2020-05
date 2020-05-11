@@ -5,8 +5,20 @@ class Title extends React.Component {
     text: PropTypes.string.isRequired,
   };
 
+  handleClick(e) {
+    e.preventDefault();
+    console.log("clicked on title (TODO switch color)");
+  }
+
   render() {
-    return React.createElement("h1", {}, this.props.text);
+    return React.createElement(
+      "h1",
+      {
+        style: { color: "blue" },
+        onClick: this.handleClick,
+      },
+      this.props.text
+    );
   }
 }
 
