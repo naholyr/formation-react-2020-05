@@ -1,14 +1,19 @@
 // 1. Déclaration des composants
 
-function Title() {
-  return React.createElement("h1", {}, "Hello, React");
+// Props: { text: string }
+function Title(props) {
+  return React.createElement("h1", {}, props.text);
 }
+
+Title.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 function Hello() {
   return React.createElement(
     "main",
     { className: "app" },
-    React.createElement(Title)
+    React.createElement(Title, { text: "Hello, React" })
   );
 }
 
