@@ -5,6 +5,12 @@ class Title extends React.Component {
     text: PropTypes.string.isRequired,
   };
 
+  // state = un objet "dictionnaire"
+  // Syntaxe: membres d'instance, déclarés dans le constructeur
+  state = {
+    color: "blue",
+  };
+
   handleClick(e) {
     e.preventDefault();
     console.log("clicked on title (TODO switch color)");
@@ -14,7 +20,8 @@ class Title extends React.Component {
     return React.createElement(
       "h1",
       {
-        style: { color: "blue" },
+        // Accès au state via "this.state" qui a été déclaré dans le constructeur
+        style: { color: this.state.color },
         onClick: this.handleClick,
       },
       this.props.text
