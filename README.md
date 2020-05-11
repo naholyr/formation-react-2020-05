@@ -3,6 +3,7 @@
 1. Découverte de React
 2. Mon premier composant
   - Sans état
+  - Avec état "stateful"
 
 ## Outils
 

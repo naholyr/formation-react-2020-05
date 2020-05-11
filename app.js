@@ -1,14 +1,16 @@
 // 1. Déclaration des composants
 
-// Props: { text: string }
-function Title(props) {
-  return React.createElement("h1", {}, props.text);
+class Title extends React.Component {
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+  };
+
+  render() {
+    return React.createElement("h1", {}, this.props.text);
+  }
 }
 
-Title.propTypes = {
-  text: PropTypes.string.isRequired,
-};
-
+// On peut faire cohabiter classes (stateful) et fonctions (stateless)
 function Hello() {
   return React.createElement(
     "main",
