@@ -13,7 +13,17 @@ class Title extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    console.log("clicked on title (TODO switch color)");
+    // Évolution du state via "this.setState"
+    // on peut appeler "this.setState(objet)" (version simple)
+    // mais si les nouvelles valeurs dépendent des anciennes, il faut utiliser la version fonction :
+    // ON DOIT TOUJOURS RETOURNER UNE NOUVELLE RÉFÉRENCE (**immutable**)
+    this.setState(function (state) {
+      if (state.color === "blue") {
+        return { color: "red" };
+      } else {
+        return { color: "blue" };
+      }
+    });
   }
 
   render() {
@@ -22,6 +32,7 @@ class Title extends React.Component {
       {
         // Accès au state via "this.state" qui a été déclaré dans le constructeur
         style: { color: this.state.color },
+        // Aïe, c'est cassé → comment ça marche "this" ?
         onClick: this.handleClick,
       },
       this.props.text
