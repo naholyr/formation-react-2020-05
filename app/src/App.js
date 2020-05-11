@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.scss';
+import PropTypes from 'prop-types';
 
 class Title extends React.Component {
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+  };
+
   state = {
     color: 'blue',
   };
