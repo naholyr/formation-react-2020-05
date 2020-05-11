@@ -11,7 +11,8 @@ class Title extends React.Component {
     color: "blue",
   };
 
-  handleClick(e) {
+  // "auto-bind" avec la syntaxe raccourcie pour les membres d'instance
+  handleClick = (e) => {
     e.preventDefault();
     // Évolution du state via "this.setState"
     // on peut appeler "this.setState(objet)" (version simple)
@@ -24,7 +25,7 @@ class Title extends React.Component {
         return { color: "blue" };
       }
     });
-  }
+  };
 
   render() {
     return React.createElement(
@@ -32,8 +33,7 @@ class Title extends React.Component {
       {
         // Accès au state via "this.state" qui a été déclaré dans le constructeur
         style: { color: this.state.color },
-        // Utilisation des fonctions flêche pour maintenir le this du scope parent
-        onClick: (e) => this.handleClick(e),
+        onClick: this.handleClick,
       },
       this.props.text
     );
