@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, node } from 'prop-types';
+import { string, node, bool } from 'prop-types';
 import './CollapsableSection.scss';
 import cx from 'classnames';
 
@@ -9,10 +9,15 @@ class CollapsableSection extends React.Component {
     className: string,
     title: string.isRequired,
     children: node.isRequired,
+    initialCollapsed: bool,
+  };
+
+  static defaultProps = {
+    initialCollapsed: false,
   };
 
   state = {
-    collapsed: false,
+    collapsed: this.props.initialCollapsed,
   };
 
   toggleCollapse = (e) => {

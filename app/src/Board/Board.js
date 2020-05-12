@@ -27,7 +27,11 @@ class Board extends React.Component {
 
   render() {
     return (
-      <CollapsableSection className="Board" title="Forum">
+      <CollapsableSection
+        initialCollapsed={true}
+        className="Board"
+        title="Forum"
+      >
         {openMessage && (
           <section className="if-expanded BoardMessage">
             <h3>

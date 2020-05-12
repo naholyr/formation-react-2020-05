@@ -7,7 +7,11 @@ import CollapsableSection from '../CollapsableSection/CollapsableSection';
 class Chat extends React.Component {
   render() {
     return (
-      <CollapsableSection className="Chat" title="Chat">
+      <CollapsableSection
+        initialCollapsed={false}
+        className="Chat"
+        title="Chat"
+      >
         <section className="ChatPost if-expanded">
           <h3>Poster un commentaire</h3>
           <form>
