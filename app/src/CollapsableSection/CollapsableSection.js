@@ -1,9 +1,7 @@
 import React from 'react';
-import { bool, string, node } from 'prop-types';
+import { string, node } from 'prop-types';
 import './CollapsableSection.scss';
 import cx from 'classnames';
-
-const collapsed = false; // TODO should be a state
 
 // Wrapper
 class CollapsableSection extends React.Component {
@@ -13,21 +11,29 @@ class CollapsableSection extends React.Component {
     children: node.isRequired,
   };
 
+  state = {
+    collapsed: false,
+  };
+
   toggleCollapse = (e) => {
     e.preventDefault();
-    // TODO toggle collapsed
+    this.setState((state) => {
+      return { collapsed: !state.collapsed };
+    });
   };
 
   render() {
     return (
       <section
         className={cx(this.props.className, 'CollapsableSection', {
-          collapsed,
+          collapsed: this.state.collapsed,
         })}
       >
         <h2>
           {this.props.title}
-          <button onClick={this.toggleCollapse}>{collapsed ? '+' : '-'}</button>
+          <button onClick={this.toggleCollapse}>
+            {this.state.collapsed ? '+' : '-'}
+          </button>
         </h2>
         {this.props.children}
       </section>
