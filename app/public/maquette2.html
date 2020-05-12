@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>React App</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      header {
+        text-align: center;
+        position: relative;
+      }
+      header .auth {
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+      }
+
+      main {
+        margin: 1rem;
+        display: flex;
+      }
+      main section {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        flex: 1;
+        box-shadow: 3px 3px 12px #00000033;
+      }
+
+      section .btn-expand {
+        display: none;
+      }
+      section.collapsed {
+        flex: 0;
+      }
+      section.collapsed .if-expanded {
+        display: none;
+      }
+      section.collapsed .btn-expand {
+        display: initial;
+      }
+      section.collapsed .btn-collapse {
+        display: none;
+      }
+      section h2, section h3, section h4 {
+        background: #e0e9ff;
+        /* cancel container's padding */
+        margin-top: -.5rem;
+        margin-left: -.5rem;
+        margin-right: -.5rem;
+        padding: 0.5rem;
+        white-space: nowrap;
+      }
+      section h2 {
+        text-align: center;
+        padding: 1rem;
+      }
+      section h3 {
+        background: #eaf4ff;
+      }
+      section h4 {
+        background: #f3f3f3;
+      }
+
+      .Board span.count {
+        font-weight: bold;
+      }
+      .BoardPost input, .BoardPost textarea, .BoardPost button {
+        padding: 0.1rem;
+        margin: 0.5rem;
+        display: block;
+        width: 40rem;
+      }
+
+      .Chat span.count {
+        font-weight: bold;
+      }
+      .Chat ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .Chat li {
+        margin: 0.5rem 0;
+        padding: 0;
+        display: flex;
+      }
+      .Chat li .info { /* author + date container */
+        margin: .5rem 1rem .5rem 0;
+      }
+      .Chat li .info strong, .Chat li .info time { /* same size for all to ensure consistency */
+        display: block;
+        width: 10rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .Chat li strong { /* author */
+        text-align: right;
+      }
+      .Chat li time { /* date */
+        text-align: right;
+        font-size: 75%;
+        color: #ccc;
+      }
+      .Chat li p { /* message */
+        flex: 1;
+        margin: .5rem 0;
+        padding: 0;
+      }
+
+      .ChatPost form {
+        display: flex;
+      }
+      .ChatPost form input, .ChatPost form button {
+        padding: .5rem;
+      }
+      .ChatPost form input {
+        flex: 1;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.75rem;
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <header>
+        <h1>Commz</h1>
+        <div class="auth">
+          Connecté en tant que <strong>Quelqu'un</strong>
+          <button onclick="location.href='maquette.html'">Déconnexion</button>
+        </div>
+      </header>
+
+      <main>
+
+        <section class="Board collapsed">
+          <h2>
+            Forum
+            <button class="btn-collapse" onclick="document.querySelector('.Board').classList.toggle('collapsed')">-</button>
+            <button class="btn-expand" onclick="document.querySelector('.Board').classList.toggle('collapsed')">+</button>
+          </h2>
+
+          <section class="if-expanded BoardMessage" style="display:none"><!-- click on message = show -->
+            <h3>
+              Sujet du message sélectionné
+              <button onclick="document.querySelector('.BoardMessage').style.display='none'">×</button>
+            </h3>
+            <!-- TODO <p>Chargement…</p> -->
+            <div class="info">
+              <strong>Quelqu'un</strong>
+              <time title="11 mai 2020 10:00">il y a 3 jours</time>
+            </div>
+            <div class="message">Texte du message sélectionné (idée: on pourrait gérer du Markdown ?)</div>
+
+            <p>2 réponses</p>
+            <ul class="BoardMessageReplies">
+              <li>
+                <div class="info">
+                  <strong>Quelqu'un d'autre</strong>
+                  <time title="11 mai 2020 10:02">2 minutes après</time>
+                </div>
+                <div class="message">Je ne suis pas d'accord</div>
+              </li>
+              <li>
+                <div class="info">
+                  <strong>Quelqu'un d'autre</strong>
+                  <time title="11 mai 2020 11:50">environ 2 heures après</time>
+                </div>
+                <div class="message">Toi t'es jamais d'accord de toute façon</div>
+              </li>
+            </ul>
+
+            <section class="BoardReply">
+              <h4>Répondre à ce message</h4>
+              <form>
+                <textarea rows="10" placeholder="Le texte de votre message (TODO autoriser le Markdown ?)"></textarea>
+                <button type="submit">Poster votre réponse</button>
+              </form>
+            </section>
+          </section>
+
+          <p><span class="count">3</span> messages</p>
+
+          <ul class="if-expanded">
+            <li>
+              <a href="#message" onclick="document.querySelector('.BoardMessage').style.display=''">Second message avec un titre très long qu'on devrait peut-être tronquer parce que sinon ça va prendre une place folle et on n'a pas que ça à faire d'afficher des romans, mais peut-être aussi qu'on devrait simplement limiter la taille des sujets ?</a>
+              par
+              <strong>Quelqu'un d'autre</strong>
+              <time title="12 mai 2020 09:53">il y a quelques instants</time>
+            </li>
+            <li>
+              <a href="#message" onclick="document.querySelector('.BoardMessage').style.display=''">Premier message</a>
+              par
+              <strong>Quelqu'un</strong>
+              <time title="12 mai 2020 09:52">il y a quelques instants</time>
+            </li>
+            <li>
+              <a href="#message" onclick="document.querySelector('.BoardMessage').style.display=''">Message d'intro</a>
+              par
+              <strong>Admin</strong>
+              <time title="10 juin 2010">il y a 10 ans</time>
+            </li>
+          </ul>
+
+          <section class="BoardPost if-expanded">
+            <h3>Démarrer un nouveau fil de discussion</h3>
+            <form>
+              <input type="text" placeholder="Le sujet de votre message">
+              <textarea rows="10" placeholder="Le texte de votre message (TODO autoriser le Markdown ?)"></textarea>
+              <button type="submit">Démarrer la discussion</button>
+            </form>
+          </section>
+        </section>
+
+        <section class="Chat">
+          <h2>
+            Chat
+            <button class="btn-collapse" onclick="document.querySelector('.Chat').classList.toggle('collapsed')">-</button>
+            <button class="btn-expand" onclick="document.querySelector('.Chat').classList.toggle('collapsed')">+</button>
+          </h2>
+
+          <section class="ChatPost if-expanded">
+            <h3>Poster un commentaire</h3>
+            <form>
+              <input type="text" placeholder="Votre message" autofocus>
+              <button type="submit">Envoyer votre message</button>
+            </form>
+          </section>
+
+          <p><span class="count">6</span> messages</p>
+          <ul class="if-expanded">
+            <li>
+              <div class="info">
+                <strong title="Lorem ipsum">Lorem ipsum</strong>
+                <time title="12 mai 2020 09:53">il y a quelques instants</time>
+              </div>
+              <p>dolor sit amet, consectetur adipiscing elit. Fusce eu nunc fringilla, interdum ante ac, ultricies magna. Nulla facilisi. Nullam ac urna laoreet, blandit tellus ac</p>
+            </li>
+            <li>
+              <div class="info">
+                <strong title="porta ex">porta ex</strong>
+                <time title="12 mai 2020 09:53">il y a quelques instants</time>
+              </div>
+              <p>Nam pretium rutrum sem, a auctor nisi interdum rhoncus. Ut a tincidunt nunc. Fusce sit amet tellus a massa malesuada</p>
+            </li>
+            <li>
+              <div class="info">
+                <strong title="pulvinar nec non est">pulvinar nec non est</strong>
+                <time title="12 mai 2020 09:53">il y a quelques instants</time>
+              </div>
+              <p>Donec volutpat ante at mauris volutpat, at condimentum magna pharetra. Pellentesque tempor diam a tincidunt porttitor.</p>
+            </li>
+            <li>
+              <div class="info">
+                <strong title="Suspendisse">Suspendisse</strong>
+                <time title="12 mai 2020 09:53">il y a quelques instants</time>
+              </div>
+              <p>porttitor sapien et eros ornare ornare. Maecenas at leo vitae est blandit suscipit non sed velit. Fusce quis neque ante.</p>
+            </li>
+            <li>
+              <div class="info">
+                <strong title="Nullam pretium">Nullam pretium</strong>
+                <time title="12 mai 2020 09:53">il y a quelques instants</time>
+              </div>
+              <p>felis et egestas finibus. Nullam sed augue quis orci porta dictum id ac massa. Nunc rutrum pharetra tempus. Proin ac massa ac magna viverra vehicula id in ex. Suspendisse id sagittis turpis. Nulla sit amet vehicula quam. Cras quis tellus purus. Aenean sodales dui et lectus aliquet egestas.</p>
+            </li>
+            <li>
+              <div class="info">
+                <strong title="Proin id lobortis">Proin id lobortis</strong>
+                <time title="12 mai 2020 09:53">il y a quelques instants</time>
+              </div>
+              <p>enim. Nullam non vulputate dolor.</p>
+            </li>
+          </ul>
+        </section>
+
+      </main>
+      <footer>
+        © Dream Team 2020
+      </footer>
+    </div>
+  </body>
+</html>

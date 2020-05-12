@@ -1,7 +1,7 @@
 ## Formation React
 
 1. Découverte de React
-2. Mon premier composant
+2. Mon premier composant statique
   - Sans état
   - Avec état "stateful"
 3. Cycle de vie
@@ -17,6 +17,12 @@
   - Boucles : ``{array.map(item => élément)}``
     - Penser à ``key`` pour les performances et l'état
   - Conditions : ``{test ? élément1 : élément2}`` ou ``{test || élément}``
+6. Démarrage du TP "Forum/Chat"
+  - Conversion d'une maquette HTML (formulaire de login)
+    - class → className
+    - autofocus → autoFocus, onclick → onClick, etc…
+    - onClick = une fonction, style = un objet
+    - classes dynamiques → ``npm add classnames``
 
 ## Outils
 
