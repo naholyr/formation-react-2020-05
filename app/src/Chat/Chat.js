@@ -2,23 +2,12 @@ import React from 'react';
 import './Chat.scss';
 import { bool } from 'prop-types';
 import cx from 'classnames';
-
-const collapsed = false;
+import CollapsableSection from '../CollapsableSection/CollapsableSection';
 
 class Chat extends React.Component {
-  toggleCollapse = (e) => {
-    e.preventDefault();
-    // TODO toggle collapsed
-  };
-
   render() {
     return (
-      <section className={cx('Chat', { collapsed })}>
-        <h2>
-          Chat
-          <button onClick={this.toggleCollapse}>{collapsed ? '+' : '-'}</button>
-        </h2>
-
+      <CollapsableSection className="Chat" title="Chat">
         <section className="ChatPost if-expanded">
           <h3>Poster un commentaire</h3>
           <form>
@@ -93,7 +82,7 @@ class Chat extends React.Component {
             <p>enim. Nullam non vulputate dolor.</p>
           </li>
         </ul>
-      </section>
+      </CollapsableSection>
     );
   }
 }

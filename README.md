@@ -24,6 +24,7 @@
     - onClick = une fonction, style = un objet
     - classes dynamiques → ``npm add classnames``
   - Un peu le bazar, rangeons au moins les composants dans des dossiers…
+  - Le pattern "Wrapper" pour réutiliser des comportements
 
 ## Outils
 

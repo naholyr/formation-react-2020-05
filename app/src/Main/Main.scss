@@ -6,41 +6,23 @@ main {
     padding: 0.5rem;
     flex: 1;
     box-shadow: 3px 3px 12px #00000033;
+    h2, h3, h4 {
+      background: #e0e9ff;
+      /* cancel container's padding */
+      margin-top: -.5rem;
+      margin-left: -.5rem;
+      margin-right: -.5rem;
+      padding: 0.5rem;
+    }
+    h2 {
+      text-align: center;
+      padding: 1rem;
+    }
+    h3 {
+      background: #eaf4ff;
+    }
+    h4 {
+      background: #f3f3f3;
+    }
   }
-}
-
-// ça devrait plutôt être ailleurs 🤔
-section .btn-expand {
-  display: none;
-}
-section.collapsed {
-  flex: 0;
-}
-section.collapsed .if-expanded {
-  display: none;
-}
-section.collapsed .btn-expand {
-  display: initial;
-}
-section.collapsed .btn-collapse {
-  display: none;
-}
-section h2, section h3, section h4 {
-  background: #e0e9ff;
-  /* cancel container's padding */
-  margin-top: -.5rem;
-  margin-left: -.5rem;
-  margin-right: -.5rem;
-  padding: 0.5rem;
-  white-space: nowrap;
-}
-section h2 {
-  text-align: center;
-  padding: 1rem;
-}
-section h3 {
-  background: #eaf4ff;
-}
-section h4 {
-  background: #f3f3f3;
 }

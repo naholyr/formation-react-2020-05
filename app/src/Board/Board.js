@@ -2,8 +2,8 @@ import React from 'react';
 import './Board.scss';
 import { bool } from 'prop-types';
 import cx from 'classnames';
+import CollapsableSection from '../CollapsableSection/CollapsableSection';
 
-const collapsed = false;
 const openMessage = true;
 
 class Board extends React.Component {
@@ -13,11 +13,6 @@ class Board extends React.Component {
 
   static defaultProps = {
     authenticated: false,
-  };
-
-  toggleCollapse = (e) => {
-    e.preventDefault();
-    // TODO toggle collapsed
   };
 
   closeMessage = (e) => {
@@ -32,12 +27,7 @@ class Board extends React.Component {
 
   render() {
     return (
-      <section className={cx('Board', { collapsed })}>
-        <h2>
-          Forum
-          <button onClick={this.toggleCollapse}>{collapsed ? '+' : '-'}</button>
-        </h2>
-
+      <CollapsableSection className="Board" title="Forum">
         {openMessage && (
           <section className="if-expanded BoardMessage">
             <h3>
@@ -132,7 +122,7 @@ class Board extends React.Component {
             <button type="submit">Démarrer la discussion</button>
           </form>
         </section>
-      </section>
+      </CollapsableSection>
     );
   }
 }

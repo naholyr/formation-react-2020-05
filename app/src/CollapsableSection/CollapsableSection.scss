@@ -1,0 +1,20 @@
+.CollapsableSection {
+  h2 {
+    white-space: nowrap;
+  }
+
+  // Expanded
+  &:not(.collapsed) {
+    .if-collapsed {
+      display: none;
+    }
+  }
+
+  // Collapsed
+  &.collapsed {
+    flex: 0; // do not expand width
+    .if-expanded {
+      display: none;
+    }
+  }
+}
