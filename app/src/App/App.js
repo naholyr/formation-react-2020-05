@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 
-const authenticated = true; // set to false to be logged in
+const authenticated = false; // set to false to be logged in
 
 class App extends React.Component {
   render() {

@@ -25,6 +25,9 @@
     - classes dynamiques → ``npm add classnames``
   - Un peu le bazar, rangeons au moins les composants dans des dossiers…
   - Le pattern "Wrapper" pour réutiliser des comportements
+  - Gestion de formulaire
+    - Composant contrôlé = le parent contrôle son rendu à tout moment
+    - Composant non contrôle = le parent donne un état initial et l'enfant évolue de son côté
 
 ## Outils
 
