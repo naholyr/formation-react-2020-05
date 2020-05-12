@@ -1,0 +1,13 @@
+.Login {
+  display: block;
+  text-align: center;
+  flex: 0;
+  margin: auto;
+  min-width: 50rem;
+
+  form {
+    input, button {
+      padding: 1rem;
+    }
+  }
+}

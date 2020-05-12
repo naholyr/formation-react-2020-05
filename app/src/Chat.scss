@@ -1,0 +1,51 @@
+.Chat {
+  span.count {
+    font-weight: bold;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin: 0.5rem 0;
+    padding: 0;
+    display: flex;
+
+    .info { /* author + date container */
+      margin: .5rem 1rem .5rem 0;
+    }
+    .info strong, .info time { /* same size for all to ensure consistency */
+      display: block;
+      width: 10rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    strong { /* author */
+      text-align: right;
+    }
+    time { /* date */
+      text-align: right;
+      font-size: 75%;
+      color: #ccc;
+    }
+    p { /* message */
+      flex: 1;
+      margin: .5rem 0;
+      padding: 0;
+    }
+  }
+
+  .ChatPost {
+    form {
+      display: flex;
+      input, button {
+        padding: .5rem;
+      }
+      input {
+        flex: 1;
+      }
+    }
+  }
+}

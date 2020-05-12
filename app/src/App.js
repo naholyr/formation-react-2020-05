@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.scss';
-import Title from './Title';
-import Sample from './Sample';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
-function App() {
-  return (
-    <main className="App">
-      <Title text="Hello, React" />
-      <Sample />
-    </main>
-  );
+const authenticated = false; // set to false to be logged in
+
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <Header authenticated={authenticated} />
+        <Main authenticated={authenticated} />
+        <Footer />
+      </>
+    );
+  }
 }
 
 export default App;

@@ -1,0 +1,13 @@
+.Board {
+  span.count {
+    font-weight: bold;
+  }
+  .BoardPost, .BoardReply {
+    input, textarea, button {
+      padding: 0.1rem;
+      margin: 0.5rem;
+      display: block;
+      width: 40rem;
+    }
+  }
+}
