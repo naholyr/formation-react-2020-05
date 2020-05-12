@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 
 const authenticated = false; // set to false to be logged in
 

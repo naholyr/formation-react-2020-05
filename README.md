@@ -23,6 +23,7 @@
     - autofocus → autoFocus, onclick → onClick, etc…
     - onClick = une fonction, style = un objet
     - classes dynamiques → ``npm add classnames``
+  - Un peu le bazar, rangeons au moins les composants dans des dossiers…
 
 ## Outils
 
