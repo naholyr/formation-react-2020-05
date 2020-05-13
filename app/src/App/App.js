@@ -6,14 +6,16 @@ import Footer from '../Footer/Footer';
 
 class App extends React.Component {
   state = {
-    username: null,
+    username: localStorage.getItem('username') || null,
   };
 
   handleLogin = (username) => {
+    localStorage.setItem('username', username);
     this.setState({ username });
   };
 
   handleLogout = () => {
+    localStorage.removeItem('username');
     this.setState({ username: null });
   };
 
