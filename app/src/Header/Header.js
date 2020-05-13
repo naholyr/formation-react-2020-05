@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.scss';
 import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
+import { logOut } from '../actions';
 
 class Header extends React.Component {
   static propTypes = {
@@ -12,7 +13,7 @@ class Header extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
     localStorage.removeItem('username');
-    this.props.dispatch({ type: 'LOG_OUT' });
+    this.props.dispatch(logOut());
   };
 
   render() {

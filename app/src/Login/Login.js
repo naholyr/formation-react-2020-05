@@ -2,6 +2,7 @@ import React from 'react';
 import './Login.scss';
 import { func } from 'prop-types';
 import { connect } from 'react-redux';
+import { logIn } from '../actions';
 
 class Login extends React.Component {
   static propTypes = {
@@ -12,7 +13,7 @@ class Login extends React.Component {
     e.preventDefault();
     const username = e.target.elements.username.value;
     localStorage.setItem('username', username);
-    this.props.dispatch({ type: 'LOG_IN', payload: { username } });
+    this.props.dispatch(logIn(username));
   };
 
   render() {
