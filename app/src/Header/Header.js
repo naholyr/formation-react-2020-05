@@ -7,13 +7,13 @@ import { logOut } from '../actions';
 class Header extends React.Component {
   static propTypes = {
     username: string,
-    dispatch: func.isRequired,
+    onLogout: func.isRequired,
   };
 
   handleClick = (e) => {
     e.preventDefault();
     localStorage.removeItem('username');
-    this.props.dispatch(logOut());
+    this.props.onLogout();
   };
 
   render() {
@@ -36,4 +36,11 @@ const mapStateToProps = (state) => ({
   username: state.username,
 });
 
-export default connect(mapStateToProps)(Header);
+// List of specialized functions dispatching actions, passed as props
+const mapDispatchToProps = (dispatch) => ({
+  onLogout: () => {
+    dispatch(logOut());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

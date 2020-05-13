@@ -6,14 +6,14 @@ import { logIn } from '../actions';
 
 class Login extends React.Component {
   static propTypes = {
-    dispatch: func.isRequired,
+    onLogin: func.isRequired,
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const username = e.target.elements.username.value;
     localStorage.setItem('username', username);
-    this.props.dispatch(logIn(username));
+    this.props.onLogin(username);
   };
 
   render() {
@@ -105,4 +105,11 @@ class FormControlled extends React.Component {
 
 */
 
-export default connect()(Login);
+// List of specialized functions dispatching actions, passed as props
+const mapDispatchToProps = (dispatch) => ({
+  onLogin: (username) => {
+    dispatch(logIn(username));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Login);
