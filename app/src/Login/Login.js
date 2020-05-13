@@ -12,7 +12,6 @@ class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const username = e.target.elements.username.value;
-    localStorage.setItem('username', username);
     this.props.onLogin(username);
   };
 

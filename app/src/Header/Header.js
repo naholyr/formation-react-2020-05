@@ -12,7 +12,6 @@ class Header extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    localStorage.removeItem('username');
     this.props.onLogout();
   };
 
