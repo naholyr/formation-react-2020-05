@@ -30,4 +30,9 @@ class Header extends React.Component {
   }
 }
 
-export default connect()(Header);
+// Map Redux store's state to component's props
+const mapStateToProps = (state) => ({
+  username: state.username,
+});
+
+export default connect(mapStateToProps)(Header);
