@@ -106,10 +106,9 @@ class FormControlled extends React.Component {
 */
 
 // List of specialized functions dispatching actions, passed as props
-const mapDispatchToProps = (dispatch) => ({
-  onLogin: (username) => {
-    dispatch(logIn(username));
-  },
-});
+// shortcut version
+const mapDispatchToProps = {
+  onLogin: logIn,
+};
 
 export default connect(null, mapDispatchToProps)(Login);
