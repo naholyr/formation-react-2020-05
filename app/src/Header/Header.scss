@@ -1,4 +1,9 @@
 header {
   text-align: center;
   position: relative;
+  .auth {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+  }
 }

@@ -1,28 +1,36 @@
 import React from 'react';
 import './Login.scss';
+import { func } from 'prop-types';
 
 class Login extends React.Component {
+  static propTypes = {
+    onSubmit: func.isRequired,
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSubmit(e.target.elements.username.value);
+  };
+
   render() {
     return (
       <section className="Login">
         <h2>Identification</h2>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
+            name="username"
             type="text"
             placeholder="Votre nom d’utilisateur"
-            value="Quelqu'un"
             autoFocus
           />
           <button type="submit">Go !</button>
         </form>
-        <hr />
-        <FormUncontrolled />
-        <hr />
-        <FormControlled />
       </section>
     );
   }
 }
+
+/*
 
 // Composant non contrôlé =
 // - le parent laisse l'enfant gérer son state et son rendu
@@ -90,5 +98,7 @@ class FormControlled extends React.Component {
     );
   }
 }
+
+*/
 
 export default Login;

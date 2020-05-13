@@ -4,14 +4,27 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 
-const authenticated = false; // set to false to be logged in
-
 class App extends React.Component {
+  state = {
+    username: null,
+  };
+
+  handleLogin = (username) => {
+    this.setState({ username });
+  };
+
+  handleLogout = () => {
+    this.setState({ username: null });
+  };
+
   render() {
     return (
       <>
-        <Header authenticated={authenticated} />
-        <Main authenticated={authenticated} />
+        <Header username={this.state.username} onLogout={this.handleLogout} />
+        <Main
+          authenticated={this.state.username !== null}
+          onLogin={this.handleLogin}
+        />
         <Footer />
       </>
     );

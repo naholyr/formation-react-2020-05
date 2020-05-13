@@ -1,7 +1,5 @@
 import React from 'react';
 import './Chat.scss';
-import { bool } from 'prop-types';
-import cx from 'classnames';
 import CollapsableSection from '../CollapsableSection/CollapsableSection';
 
 class Chat extends React.Component {

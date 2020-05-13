@@ -5,10 +5,10 @@ import Login from '../Login/Login';
 import Board from '../Board/Board';
 import Chat from '../Chat/Chat';
 
-const Main = ({ authenticated = false }) => {
+const Main = ({ authenticated = false, onLogin }) => {
   return (
     <main>
-      {!authenticated && <Login />}
+      {!authenticated && <Login onSubmit={onLogin} />}
       {authenticated && <Board />}
       {authenticated && <Chat />}
     </main>

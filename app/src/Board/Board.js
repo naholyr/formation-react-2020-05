@@ -1,7 +1,6 @@
 import React from 'react';
 import './Board.scss';
 import { bool } from 'prop-types';
-import cx from 'classnames';
 import CollapsableSection from '../CollapsableSection/CollapsableSection';
 
 const openMessage = true;
