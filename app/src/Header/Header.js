@@ -1,16 +1,18 @@
 import React from 'react';
 import './Header.scss';
 import { string, func } from 'prop-types';
+import { connect } from 'react-redux';
 
 class Header extends React.Component {
   static propTypes = {
     username: string,
-    onLogout: func.isRequired,
+    dispatch: func.isRequired,
   };
 
   handleClick = (e) => {
     e.preventDefault();
-    this.props.onLogout();
+    localStorage.removeItem('username');
+    this.props.dispatch({ type: 'LOG_OUT' });
   };
 
   render() {
@@ -28,4 +30,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default connect()(Header);

@@ -1,15 +1,18 @@
 import React from 'react';
 import './Login.scss';
 import { func } from 'prop-types';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   static propTypes = {
-    onSubmit: func.isRequired,
+    dispatch: func.isRequired,
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(e.target.elements.username.value);
+    const username = e.target.elements.username.value;
+    localStorage.setItem('username', username);
+    this.props.dispatch({ type: 'LOG_IN', payload: { username } });
   };
 
   render() {
@@ -101,4 +104,4 @@ class FormControlled extends React.Component {
 
 */
 
-export default Login;
+export default connect()(Login);
