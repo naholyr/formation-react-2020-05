@@ -19,7 +19,7 @@ class Chat extends React.Component {
       }).isRequired
     ),
     username: string,
-    setChatMessages: func.isRequired,
+    loadChatMessages: func.isRequired,
     addChatMessage: func.isRequired,
   };
 
@@ -31,7 +31,7 @@ class Chat extends React.Component {
   // This could be in index.js, or in a middleware
   // but we want messages to be load if and only if the component is actually loaded
   componentDidMount() {
-    api.onChatMessages(this.props.setChatMessages);
+    this.props.loadChatMessages();
     this.offChatMessage = api.onChatMessage(this.props.addChatMessage);
   }
 
@@ -118,7 +118,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setChatMessages: actions.setChatMessages,
+  loadChatMessages: actions.loadChatMessages,
   addChatMessage: actions.addChatMessage,
 };
 
