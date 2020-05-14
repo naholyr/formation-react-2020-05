@@ -1,9 +1,46 @@
 import React from 'react';
 import './Chat.scss';
 import CollapsableSection from '../CollapsableSection/CollapsableSection';
+import { arrayOf, shape, number, string } from 'prop-types';
+import { formatDistance, format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 class Chat extends React.Component {
+  static propTypes = {
+    messages: arrayOf(
+      shape({
+        author: string.isRequired,
+        text: string.isRequired,
+        date: number.isRequired,
+      }).isRequired
+    ),
+  };
+
+  static defaultProps = {
+    messages: [
+      {
+        author: 'Fake user',
+        text: 'Fake message',
+        date: 1589488113914,
+      },
+    ],
+  };
+
+  formatDateRelative(date) {
+    return formatDistance(date, Date.now(), {
+      locale: fr,
+      includeSeconds: true,
+      addSuffix: true,
+    });
+  }
+
+  formatDateLong(date) {
+    return format(date, 'PPpp', { locale: fr });
+  }
+
   render() {
+    const { messages } = this.props;
+
     return (
       <CollapsableSection
         initialCollapsed={false}
@@ -19,70 +56,21 @@ class Chat extends React.Component {
         </section>
 
         <p>
-          <span className="count">6</span> messages
+          <span className="count">{messages.length}</span> message
+          {messages.length > 1 ? 's' : ''}
         </p>
         <ul className="if-expanded">
-          <li>
-            <div className="info">
-              <strong title="Lorem ipsum">Lorem ipsum</strong>
-              <time title="12 mai 2020 09:53">il y a quelques instants</time>
-            </div>
-            <p>
-              dolor sit amet, consectetur adipiscing elit. Fusce eu nunc
-              fringilla, interdum ante ac, ultricies magna. Nulla facilisi.
-              Nullam ac urna laoreet, blandit tellus ac
-            </p>
-          </li>
-          <li>
-            <div className="info">
-              <strong title="porta ex">porta ex</strong>
-              <time title="12 mai 2020 09:53">il y a quelques instants</time>
-            </div>
-            <p>
-              Nam pretium rutrum sem, a auctor nisi interdum rhoncus. Ut a
-              tincidunt nunc. Fusce sit amet tellus a massa malesuada
-            </p>
-          </li>
-          <li>
-            <div className="info">
-              <strong title="pulvinar nec non est">pulvinar nec non est</strong>
-              <time title="12 mai 2020 09:53">il y a quelques instants</time>
-            </div>
-            <p>
-              Donec volutpat ante at mauris volutpat, at condimentum magna
-              pharetra. Pellentesque tempor diam a tincidunt porttitor.
-            </p>
-          </li>
-          <li>
-            <div className="info">
-              <strong title="Suspendisse">Suspendisse</strong>
-              <time title="12 mai 2020 09:53">il y a quelques instants</time>
-            </div>
-            <p>
-              porttitor sapien et eros ornare ornare. Maecenas at leo vitae est
-              blandit suscipit non sed velit. Fusce quis neque ante.
-            </p>
-          </li>
-          <li>
-            <div className="info">
-              <strong title="Nullam pretium">Nullam pretium</strong>
-              <time title="12 mai 2020 09:53">il y a quelques instants</time>
-            </div>
-            <p>
-              felis et egestas finibus. Nullam sed augue quis orci porta dictum
-              id ac massa. Nunc rutrum pharetra tempus. Proin ac massa ac magna
-              viverra vehicula id in ex. Suspendisse id sagittis turpis. Nulla
-              sit amet vehicula quam. Cras quis tellus purus. Aenean sodales dui
-              et lectus aliquet egestas.
-            </p>
-          </li>
-          <li>
-            <div className="info">
-              <strong title="Proin id lobortis">Proin id lobortis</strong>
-              <time title="12 mai 2020 09:53">il y a quelques instants</time>
-            </div>
-            <p>enim. Nullam non vulputate dolor.</p>
-          </li>
+          {messages.map((m) => (
+            <li key={m.date}>
+              <div className="info">
+                <strong title={m.author}>{m.author}</strong>
+                <time title={this.formatDateLong(m.date)}>
+                  {this.formatDateRelative(m.date)}
+                </time>
+              </div>
+              <p>{m.text}</p>
+            </li>
+          ))}
         </ul>
       </CollapsableSection>
     );
