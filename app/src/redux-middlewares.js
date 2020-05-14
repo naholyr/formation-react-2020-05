@@ -1,4 +1,5 @@
 import { logIn } from './actions';
+import * as api from './api';
 
 // Side-effect: load/save login in localstorage
 export const loginPersistence = (store) => (next) => (action) => {
@@ -12,11 +13,28 @@ export const loginPersistence = (store) => (next) => (action) => {
   }
   // Login: save
   else if (action.type === 'LOG_IN') {
-    localStorage.setItem('username', action.payload.username);
+    const username = action.payload.username;
+    api
+      .logIn(username)
+      .then(() => {
+        localStorage.setItem('username', username);
+      })
+      .catch((err) => {
+        // Logging in failed: don't store!
+        console.error(err);
+        localStorage.removeItem('username');
+      });
   }
   // Logout: delete
   else if (action.type === 'LOG_OUT') {
-    localStorage.removeItem('username');
+    api
+      .logOut()
+      .then(() => {
+        localStorage.removeItem('username');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   // Finally, always pass to next middleware
   next(action);
