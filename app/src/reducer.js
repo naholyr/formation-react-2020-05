@@ -11,6 +11,11 @@ export const reducer = (state = initialState, action) => {
       return { ...state, username: null };
     case 'SET_CHAT_MESSAGES':
       return { ...state, chatMessages: action.payload.messages };
+    case 'ADD_CHAT_MESSAGE':
+      return {
+        ...state,
+        chatMessages: [action.payload.message, ...state.chatMessages],
+      };
     default:
       return state;
   }

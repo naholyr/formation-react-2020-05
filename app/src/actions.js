@@ -16,3 +16,8 @@ export const setChatMessages = (messages) => ({
   type: 'SET_CHAT_MESSAGES',
   payload: { messages },
 });
+
+export const addChatMessage = (message) => ({
+  type: 'ADD_CHAT_MESSAGE',
+  payload: { message },
+});

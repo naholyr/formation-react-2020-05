@@ -5,8 +5,8 @@ import { arrayOf, shape, number, string, func } from 'prop-types';
 import { formatDistance, format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { connect } from 'react-redux';
-import { onChatMessages } from '../api';
-import { setChatMessages } from '../actions';
+import * as api from '../api';
+import * as actions from '../actions';
 import cx from 'classnames';
 
 class Chat extends React.Component {
@@ -20,6 +20,7 @@ class Chat extends React.Component {
     ),
     username: string,
     setChatMessages: func.isRequired,
+    addChatMessage: func.isRequired,
   };
 
   static defaultProps = {
@@ -30,7 +31,12 @@ class Chat extends React.Component {
   // This could be in index.js, or in a middleware
   // but we want messages to be load if and only if the component is actually loaded
   componentDidMount() {
-    onChatMessages(this.props.setChatMessages);
+    api.onChatMessages(this.props.setChatMessages);
+    this.offChatMessage = api.onChatMessage(this.props.addChatMessage);
+  }
+
+  componentWillUnmount() {
+    this.offChatMessage();
   }
 
   formatDateRelative(date) {
@@ -45,6 +51,21 @@ class Chat extends React.Component {
     return format(date, 'PPpp', { locale: fr });
   }
 
+  // Ref to input, to be able to manipulate its DOM
+  // So we keep it uncontrolled, but still can manipulate it's DOM behaviour
+  inputRef = React.createRef();
+
+  handlePost = (e) => {
+    e.preventDefault();
+    const input = this.inputRef.current;
+    if (input) {
+      api.chatPost(input.value);
+      // Reset & focus
+      input.value = '';
+      input.focus();
+    }
+  };
+
   render() {
     const { messages, username } = this.props;
 
@@ -56,8 +77,13 @@ class Chat extends React.Component {
       >
         <section className="ChatPost if-expanded">
           <h3>Poster un commentaire</h3>
-          <form>
-            <input type="text" placeholder="Votre message" autoFocus />
+          <form onSubmit={this.handlePost}>
+            <input
+              ref={this.inputRef}
+              type="text"
+              placeholder="Votre message"
+              autoFocus
+            />
             <button type="submit">Envoyer votre message</button>
           </form>
         </section>
@@ -92,7 +118,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setChatMessages,
+  setChatMessages: actions.setChatMessages,
+  addChatMessage: actions.addChatMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);
