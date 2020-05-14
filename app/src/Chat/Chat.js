@@ -1,9 +1,12 @@
 import React from 'react';
 import './Chat.scss';
 import CollapsableSection from '../CollapsableSection/CollapsableSection';
-import { arrayOf, shape, number, string } from 'prop-types';
+import { arrayOf, shape, number, string, func } from 'prop-types';
 import { formatDistance, format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { connect } from 'react-redux';
+import { onChatMessages } from '../api';
+import { setChatMessages } from '../actions';
 
 class Chat extends React.Component {
   static propTypes = {
@@ -14,17 +17,19 @@ class Chat extends React.Component {
         date: number.isRequired,
       }).isRequired
     ),
+    setChatMessages: func.isRequired,
   };
 
   static defaultProps = {
-    messages: [
-      {
-        author: 'Fake user',
-        text: 'Fake message',
-        date: 1589488113914,
-      },
-    ],
+    messages: [],
   };
+
+  // Side-effect: load messages
+  // This could be in index.js, or in a middleware
+  // but we want messages to be load if and only if the component is actually loaded
+  componentDidMount() {
+    onChatMessages(this.props.setChatMessages);
+  }
 
   formatDateRelative(date) {
     return formatDistance(date, Date.now(), {
@@ -77,4 +82,12 @@ class Chat extends React.Component {
   }
 }
 
-export default Chat;
+const mapStateToProps = (state) => {
+  return { messages: state.chatMessages };
+};
+
+const mapDispatchToProps = {
+  setChatMessages,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

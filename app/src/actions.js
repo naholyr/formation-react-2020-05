@@ -11,3 +11,8 @@ export const logOut = () => ({
 export const init = () => ({
   type: 'INIT',
 });
+
+export const setChatMessages = (messages) => ({
+  type: 'SET_CHAT_MESSAGES',
+  payload: { messages },
+});

@@ -1,5 +1,6 @@
 export const initialState = {
   username: null,
+  chatMessages: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -8,6 +9,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, username: action.payload.username };
     case 'LOG_OUT':
       return { ...state, username: null };
+    case 'SET_CHAT_MESSAGES':
+      return { ...state, chatMessages: action.payload.messages };
     default:
       return state;
   }
