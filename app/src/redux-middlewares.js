@@ -6,11 +6,7 @@ export const loginPersistence = (store) => (next) => (action) => {
   if (action.type === 'INIT') {
     const username = localStorage.getItem('username');
     if (username) {
-      // Use 'next' instead of 'store.dispatch' to avoid re-running
-      // all middlewares again (including this one, which would re-write
-      // into localStorage)
-      // TODO create a dedicated action which would not trigger this
-      // middleware and then use store.dispatch?
+      // Use 'store.dispatch' to ensure we pass all middlewares again
       store.dispatch(logIn(username));
     }
   }
