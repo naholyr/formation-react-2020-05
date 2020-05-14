@@ -35,6 +35,12 @@
       margin: .5rem 0;
       padding: 0;
     }
+    // Special style for myself
+    &.myself {
+      strong, p {
+        opacity: 0.5;
+      }
+    }
   }
 
   .ChatPost {

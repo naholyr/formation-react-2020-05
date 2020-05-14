@@ -7,6 +7,7 @@ import { fr } from 'date-fns/locale';
 import { connect } from 'react-redux';
 import { onChatMessages } from '../api';
 import { setChatMessages } from '../actions';
+import cx from 'classnames';
 
 class Chat extends React.Component {
   static propTypes = {
@@ -17,6 +18,7 @@ class Chat extends React.Component {
         date: number.isRequired,
       }).isRequired
     ),
+    username: string,
     setChatMessages: func.isRequired,
   };
 
@@ -44,7 +46,7 @@ class Chat extends React.Component {
   }
 
   render() {
-    const { messages } = this.props;
+    const { messages, username } = this.props;
 
     return (
       <CollapsableSection
@@ -66,7 +68,7 @@ class Chat extends React.Component {
         </p>
         <ul className="if-expanded">
           {messages.map((m) => (
-            <li key={m.date}>
+            <li key={m.date} className={cx({ myself: m.author === username })}>
               <div className="info">
                 <strong title={m.author}>{m.author}</strong>
                 <time title={this.formatDateLong(m.date)}>
@@ -83,7 +85,10 @@ class Chat extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { messages: state.chatMessages };
+  return {
+    messages: state.chatMessages,
+    username: state.username,
+  };
 };
 
 const mapDispatchToProps = {
