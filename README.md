@@ -48,3 +48,14 @@
 - serveur local : ``npx serve``
 - *create-react-app* : ``npx create-react-app app``
 - ajouter une dépendance : ``npm add nom-du-module``
+
+### Commandes npm utiles
+
+- `npm install` = récupérer les dépendendances actuelles
+- `npm start` = démarrer le projet en dév
+- `npm run build` = générer le build de prod
+- `npm add <module>` = ajouter une dépendance
+- `npm remove <module>` = retirer une dépendance
+- `npm outdated` = lister l'état des dépendances
+- `npm upgrade [module]` = mettre à jour une dépendance (modifie le package-lock)
+- `npm audit` = liste les failles de sécurité
